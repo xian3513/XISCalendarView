@@ -14,6 +14,7 @@
 		6881D33F1AFA021D009042B1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6881D33E1AFA021D009042B1 /* Images.xcassets */; };
 		6881D3421AFA021D009042B1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6881D3401AFA021D009042B1 /* LaunchScreen.xib */; };
 		6881D34E1AFA021D009042B1 /* XISCalendarViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6881D34D1AFA021D009042B1 /* XISCalendarViewTests.m */; };
+		6881D3591AFA0227009042B1 /* XISCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6881D3581AFA0227009042B1 /* XISCalendarView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,8 @@
 		6881D3471AFA021D009042B1 /* XISCalendarViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XISCalendarViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6881D34C1AFA021D009042B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6881D34D1AFA021D009042B1 /* XISCalendarViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XISCalendarViewTests.m; sourceTree = "<group>"; };
+		6881D3571AFA0227009042B1 /* XISCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XISCalendarView.h; sourceTree = "<group>"; };
+		6881D3581AFA0227009042B1 /* XISCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XISCalendarView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,10 +66,13 @@
 		6881D3251AFA021D009042B1 = {
 			isa = PBXGroup;
 			children = (
+				6881D3571AFA0227009042B1 /* XISCalendarView.h */,
+				6881D3581AFA0227009042B1 /* XISCalendarView.m */,
 				6881D3301AFA021D009042B1 /* XISCalendarView */,
 				6881D34A1AFA021D009042B1 /* XISCalendarViewTests */,
 				6881D32F1AFA021D009042B1 /* Products */,
 			);
+			indentWidth = 3;
 			sourceTree = "<group>";
 		};
 		6881D32F1AFA021D009042B1 /* Products */ = {
@@ -220,6 +226,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6881D33A1AFA021D009042B1 /* ViewController.m in Sources */,
+				6881D3591AFA0227009042B1 /* XISCalendarView.m in Sources */,
 				6881D3371AFA021D009042B1 /* AppDelegate.m in Sources */,
 				6881D3341AFA021D009042B1 /* main.m in Sources */,
 			);
