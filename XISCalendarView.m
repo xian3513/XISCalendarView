@@ -10,7 +10,6 @@
 
 static NSInteger weekNumber = 7;
 
-
 ////////////////////////////////////////////////////////////////////////////////
 //                                                                            //
 //                              XISWeekView                                   //
@@ -116,7 +115,6 @@ static NSInteger weekNumber = 7;
                    if(!dayView.title) {
                       dayView.title = @"签到";
                    }
-                   
                 }else {
                     dayView.title = [NSString stringWithFormat:@"%ld",i+1-self.weeklyOfFirstDay];
                 }
@@ -126,7 +124,6 @@ static NSInteger weekNumber = 7;
                     tap.numberOfTapsRequired = 1;
                     [dayView addGestureRecognizer:tap];
                 }
-                
             }
             [self addSubview:dayView];
             [daysArray addObject:dayView];
@@ -161,7 +158,7 @@ static NSInteger weekNumber = 7;
     if(self = [super initWithFrame:frame]) {
         CGFloat screenWidth = frame.size.width;
         CGFloat screenHeight = frame.size.height;
-      
+      //
         lastMonth = [self monthButtonsWith:@"上个月" frame:CGRectMake(screenWidth/12,0, screenWidth/6, 45)];
         nextMonth = [self monthButtonsWith:@"下个月" frame:CGRectMake(screenWidth-screenWidth/12-screenWidth/6,  lastMonth.frame.origin.y, screenWidth/6,lastMonth.frame.size.height)];
         
@@ -169,10 +166,10 @@ static NSInteger weekNumber = 7;
         dateLab.textAlignment = NSTextAlignmentCenter;
         dateLab.text = [self currentDate_Y_M_D];
         [self addSubview:dateLab];
-        
+        //
         weekView = [[XISWeekView alloc]initWithFrame:CGRectMake(0, lastMonth.frame.origin.y+lastMonth.frame.size.height, screenWidth, lastMonth.frame.size.height)];
         [self addSubview:weekView];
-        
+        //
         dateView = [[XISDateView alloc]initWithFrame:CGRectMake(0, weekView.frame.origin.y+weekView.frame.size.height, screenWidth, screenHeight-(weekView.frame.origin.y+weekView.frame.size.height)) targate:self];
         dateView.row = [self numberOfRowInMonth];
         dateView.daysOfcurrentMonth = [self numberOfDaysInCurrentMonth];
@@ -206,7 +203,6 @@ static NSInteger weekNumber = 7;
 - (NSInteger)currentDate_day {
     NSDate *  senddate=[NSDate date];
     NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
-    //    [dateformatter setDateFormat:@"YYYYMMdd"];
     [dateformatter setDateFormat:@"dd"];
     NSString *  locationString=[dateformatter stringFromDate:senddate];
     NSLog(@"currentDate:%ld",[locationString integerValue]);

@@ -21,9 +21,6 @@
    calendarView.delegate = self;
    calendarView.dataSource = self;
    [self.view addSubview:calendarView];
-   
-   //实现 datasource
-   
 }
 
 - (void)XISCalendarView:(XISDayView *)currentDayView currentDate:(NSDate *)date {
