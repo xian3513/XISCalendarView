@@ -113,7 +113,10 @@ static NSInteger weekNumber = 7;
                 if(tempDataSourceDayView) {
                     tempDataSourceDayView.frame = dayView.frame;
                     dayView = tempDataSourceDayView;
-                    dayView.title = @"签到";
+                   if(!dayView.title) {
+                      dayView.title = @"签到";
+                   }
+                   
                 }else {
                     dayView.title = [NSString stringWithFormat:@"%ld",i+1-self.weeklyOfFirstDay];
                 }
