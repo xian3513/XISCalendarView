@@ -98,12 +98,17 @@ static NSInteger weekNumber = 7;
             NSInteger rowNumber = i/weekNumber;
             XISDayView *dayView = [[XISDayView alloc]initWithFrame:CGRectMake(i%weekNumber*width, rowNumber*height, width, height)];
             if (i<self.weeklyOfFirstDay-1) {
+                              //上月
                     dayView.backgroundColor = [UIColor grayColor];
             }
             else if (i>=self.daysOfcurrentMonth+self.weeklyOfFirstDay-1) {
+                                 //下月
                 dayView.backgroundColor = [UIColor grayColor];
             }
             else {
+                              //当前月
+               
+               //判断是否实现dataSource 自定义dayView
                 XISDayView *tempDataSourceDayView = nil;
                 if( [calendarView.dataSource respondsToSelector:@selector(XISCalendarView:dayViewForDate:)]) {
                    tempDataSourceDayView = [calendarView.dataSource XISCalendarView:calendarView dayViewForDate:i-self.currentDate+1];
@@ -115,20 +120,30 @@ static NSInteger weekNumber = 7;
                    if(!dayView.title) {
                       dayView.title = @"签到";
                    }
-                }else {
+                }
+                else {
                     dayView.title = [NSString stringWithFormat:@"%ld",i+2-self.weeklyOfFirstDay];
                 }
-                if(i == self.currentDate+self.weeklyOfFirstDay-1) {
+               
+                              //当前日
+                if(i == self.currentDate+self.weeklyOfFirstDay-2) {
                     dayView.backgroundColor = [UIColor greenColor];
-                    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(currentDatePress:)];
-                    tap.numberOfTapsRequired = 1;
-                    [dayView addGestureRecognizer:tap];
+                   [self addTapGestureOnView:dayView];
                 }
             }
             [self addSubview:dayView];
             [daysArray addObject:dayView];
         }
     }
+}
+
+/*
+ *    添加点击事件
+ */
+- (void)addTapGestureOnView:(UIView *)view {
+   UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(currentDatePress:)];
+   tap.numberOfTapsRequired = 1;
+   [view addGestureRecognizer:tap];
 }
 
 - (void)currentDatePress:(UITapGestureRecognizer *)tap {
