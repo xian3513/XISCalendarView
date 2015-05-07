@@ -97,10 +97,10 @@ static NSInteger weekNumber = 7;
         for(NSInteger i=0;i<self.row*weekNumber;i++) {
             NSInteger rowNumber = i/weekNumber;
             XISDayView *dayView = [[XISDayView alloc]initWithFrame:CGRectMake(i%weekNumber*width, rowNumber*height, width, height)];
-            if (i<self.weeklyOfFirstDay) {
+            if (i<self.weeklyOfFirstDay-1) {
                     dayView.backgroundColor = [UIColor grayColor];
             }
-            else if (i>=self.daysOfcurrentMonth+self.weeklyOfFirstDay) {
+            else if (i>=self.daysOfcurrentMonth+self.weeklyOfFirstDay-1) {
                 dayView.backgroundColor = [UIColor grayColor];
             }
             else {
@@ -116,7 +116,7 @@ static NSInteger weekNumber = 7;
                       dayView.title = @"签到";
                    }
                 }else {
-                    dayView.title = [NSString stringWithFormat:@"%ld",i+1-self.weeklyOfFirstDay];
+                    dayView.title = [NSString stringWithFormat:@"%ld",i+2-self.weeklyOfFirstDay];
                 }
                 if(i == self.currentDate+self.weeklyOfFirstDay-1) {
                     dayView.backgroundColor = [UIColor greenColor];
@@ -233,7 +233,15 @@ static NSInteger weekNumber = 7;
     return ceilf((allDays-(7-today))/7.0)+1;
 }
 - (NSUInteger)weeklyOrdinality { //本月第一天是星期几
-    return [[NSCalendar currentCalendar] ordinalityOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitMonth forDate:[NSDate date]];
+   NSDateComponents *_comps = [[NSDateComponents alloc] init];
+   [_comps setDay:1];
+   [_comps setMonth:[self month]];
+   [_comps setYear:[self year]];
+   NSCalendar *gregorian = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
+   NSDate *_date = [gregorian dateFromComponents:_comps];
+   NSDateComponents *weekdayComponents = [gregorian components:NSWeekdayCalendarUnit fromDate:_date];
+   NSInteger _weekday = [weekdayComponents weekday];
+   return _weekday;
 }
 
 - (NSUInteger)numberOfDaysInCurrentMonth  {  //一个月有多少天

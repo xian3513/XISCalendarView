@@ -21,6 +21,7 @@
    calendarView.delegate = self;
    calendarView.dataSource = self;
    [self.view addSubview:calendarView];
+   
 }
 
 - (void)XISCalendarView:(XISDayView *)currentDayView currentDate:(NSDate *)date {
@@ -35,7 +36,7 @@
       cell.title = @"haha";
       cell.backgroundColor = [UIColor redColor];
    }
-   NSLog(@"date:%ld",date);
+  // NSLog(@"date:%ld",date);
    return cell;
 }
 
