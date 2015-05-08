@@ -111,7 +111,7 @@ static NSInteger weekNumber = 7;
                //判断是否实现dataSource 自定义dayView
                 XISDayView *tempDataSourceDayView = nil;
                 if( [calendarView.dataSource respondsToSelector:@selector(XISCalendarView:dayViewForDate:)]) {
-                   tempDataSourceDayView = [calendarView.dataSource XISCalendarView:calendarView dayViewForDate:i-self.currentDate+1];
+                   tempDataSourceDayView = [calendarView.dataSource XISCalendarView:calendarView dayViewForDate:i+1-self.weeklyOfFirstDay+1];
                 }
                 
                 if(tempDataSourceDayView) {
