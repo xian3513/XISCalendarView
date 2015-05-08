@@ -30,7 +30,7 @@
 @property (nonatomic,strong) UIColor *weekBackgroudColor;
 @property (nonatomic,weak) id<XISCalendarViewDelegate>delegate;
 @property (nonatomic,weak) id<XISCalendarViewDataSource>dataSource;
-
+@property (nonatomic,readonly) NSInteger dayOfCurrentMonth;
 - (NSDate *)current_Date;
 @end
 

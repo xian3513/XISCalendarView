@@ -35,7 +35,9 @@
       cell = [[XISDayView alloc]init];
       cell.title = @"haha";
       cell.backgroundColor = [UIColor redColor];
+       NSLog(@"currentDay:%ld",calendarView.dayOfCurrentMonth);
    }
+  
   // NSLog(@"date:%ld",date);
    return cell;
 }

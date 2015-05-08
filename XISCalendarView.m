@@ -173,6 +173,7 @@ static NSInteger weekNumber = 7;
     if(self = [super initWithFrame:frame]) {
         CGFloat screenWidth = frame.size.width;
         CGFloat screenHeight = frame.size.height;
+       _dayOfCurrentMonth = [self currentDate_day];
       //
         lastMonth = [self monthButtonsWith:@"上个月" frame:CGRectMake(screenWidth/12,0, screenWidth/6, 45)];
         nextMonth = [self monthButtonsWith:@"下个月" frame:CGRectMake(screenWidth-screenWidth/12-screenWidth/6,  lastMonth.frame.origin.y, screenWidth/6,lastMonth.frame.size.height)];
