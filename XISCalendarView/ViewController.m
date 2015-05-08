@@ -12,11 +12,13 @@
 
 @end
 
-@implementation ViewController
+@implementation ViewController {
+   XISCalendarView *calendarView;
+}
 
 - (void)viewDidLoad {
    [super viewDidLoad];
-   XISCalendarView *calendarView = [[XISCalendarView alloc]initWithFrame:CGRectMake(0, 20, 320, 300)];
+   calendarView = [[XISCalendarView alloc]initWithFrame:CGRectMake(0, 20, 320, 300)];
    calendarView.backgroundColor = [UIColor grayColor];
    calendarView.delegate = self;
    calendarView.dataSource = self;
@@ -25,8 +27,13 @@
 }
 
 - (void)XISCalendarView:(XISDayView *)currentDayView currentDate:(NSDate *)date {
-   NSLog(@"%@",date);
-   currentDayView.title = @"签到";
+   NSLog(@"clickedDate:%ld    currentDate:%@",currentDayView.tag,date);
+   if(calendarView.currentDayOfMonth == currentDayView.tag) {
+      currentDayView.title = @"签到";
+   } else {
+   currentDayView.title = @"X";
+   }
+   
 }
 
 - (XISDayView *)XISCalendarView:(XISCalendarView *)calendarView dayViewForDate:(NSInteger)date {
@@ -35,7 +42,6 @@
       cell = [[XISDayView alloc]init];
       cell.title = @"haha";
       cell.backgroundColor = [UIColor redColor];
-       NSLog(@"currentDay:%ld",calendarView.dayOfCurrentMonth);
    }
   
   // NSLog(@"date:%ld",date);

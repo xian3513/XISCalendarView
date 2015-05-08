@@ -107,29 +107,7 @@ static NSInteger weekNumber = 7;
             }
             else {
                               //当前月
-               
-               //判断是否实现dataSource 自定义dayView
-                XISDayView *tempDataSourceDayView = nil;
-                if( [calendarView.dataSource respondsToSelector:@selector(XISCalendarView:dayViewForDate:)]) {
-                   tempDataSourceDayView = [calendarView.dataSource XISCalendarView:calendarView dayViewForDate:i+1-self.weeklyOfFirstDay+1];
-                }
-                
-                if(tempDataSourceDayView) {
-                    tempDataSourceDayView.frame = dayView.frame;
-                    dayView = tempDataSourceDayView;
-                   if(!dayView.title) {
-                      dayView.title = @"签到";
-                   }
-                }
-                else {
-                    dayView.title = [NSString stringWithFormat:@"%ld",i+2-self.weeklyOfFirstDay];
-                }
-               
-                              //当前日
-                if(i == self.currentDate+self.weeklyOfFirstDay-2) {
-                    dayView.backgroundColor = [UIColor greenColor];
-                   [self addTapGestureOnView:dayView];
-                }
+             dayView = [self currentMonthWith:dayView number:i];
             }
             [self addSubview:dayView];
             [daysArray addObject:dayView];
@@ -137,6 +115,40 @@ static NSInteger weekNumber = 7;
     }
 }
 
+- (XISDayView *)currentMonthWith:(XISDayView *)dayView number:(NSInteger)i {
+   
+         //判断是否实现dataSource 自定义dayView
+   XISDayView *tempDataSourceDayView = nil;
+   if( [calendarView.dataSource respondsToSelector:@selector(XISCalendarView:dayViewForDate:)]) {
+      tempDataSourceDayView = [calendarView.dataSource XISCalendarView:calendarView dayViewForDate:i+1-self.weeklyOfFirstDay+1];
+   }
+                  //如果外部有自定义dayView
+      if(tempDataSourceDayView) {
+         tempDataSourceDayView.frame = dayView.frame;
+         dayView = tempDataSourceDayView;
+         
+         if(!dayView.title) {
+            dayView.title = @"签到";
+         }
+      }
+   
+   else {
+                  //默认显示 日期
+      dayView.title = [NSString stringWithFormat:@"%ld",i+2-self.weeklyOfFirstDay];
+   }
+   dayView.tag = i+2-self.weeklyOfFirstDay;
+               //当月已经过去的那些天
+   if(i <= self.currentDate+self.weeklyOfFirstDay-2) {
+     [self addTapGestureOnView:dayView];
+   }
+   
+            //当前日
+   if(i == self.currentDate+self.weeklyOfFirstDay-2) {
+      dayView.backgroundColor = [UIColor greenColor];
+      [self addTapGestureOnView:dayView];
+   }
+   return dayView;
+}
 /*
  *    添加点击事件
  */
@@ -173,7 +185,7 @@ static NSInteger weekNumber = 7;
     if(self = [super initWithFrame:frame]) {
         CGFloat screenWidth = frame.size.width;
         CGFloat screenHeight = frame.size.height;
-       _dayOfCurrentMonth = [self currentDate_day];
+       _currentDayOfMonth = [self currentDate_day];
       //
         lastMonth = [self monthButtonsWith:@"上个月" frame:CGRectMake(screenWidth/12,0, screenWidth/6, 45)];
         nextMonth = [self monthButtonsWith:@"下个月" frame:CGRectMake(screenWidth-screenWidth/12-screenWidth/6,  lastMonth.frame.origin.y, screenWidth/6,lastMonth.frame.size.height)];
